@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../service";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 
 
-export const useGetProducts = (limit) => {
+export const useGetProducts = (collectionName = "products") => {
     const [productsData, setProductsData] = useState([]);
 
+    useEffect(() => {
+      const db = getFirestore();
 
-  useEffect(() => {
-    getProducts(limit)
-    .then((response) => {
-      setProductsData(response.data)
-    })
-    .catch((error) => {
-      console.log('Error data', error);
-    });
-  }, []);
+      const productsCollection = collection (db, collectionName);
 
-  return { productsData }
-}
+      getDocs(productsCollection).then((snapshot) => {
+        setProductsData(
+          snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() }))
+        );
+      });
+    }, []);
+  
+
+  return { productsData };
+}; 
+
 

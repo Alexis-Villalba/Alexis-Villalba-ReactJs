@@ -1,3 +1,25 @@
 .cartWidget{
     color: white;
 }
+.cart-widgets {
+    position: relative;
+  }
+  
+  .cart-widgets__shopping-bag {
+    width: 30px;
+    height: 30px;
+    position: relative;
+  }
+  
+  .cart-widgets__items-counter {
+    position: absolute;
+    font-weight: 700;
+    background-color: #ee4848;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 0 6px;
+    text-align: center;
+    right: -12px;
+    top: -6px; /* Ajusta la posición vertical según tu diseño */
+  }
+  
